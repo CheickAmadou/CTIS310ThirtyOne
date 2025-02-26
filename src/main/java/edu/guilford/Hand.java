@@ -33,9 +33,8 @@ public class Hand {
         return hand.get(index);
     }
 
-    // Calculate the value of the hand
-    public int getTotalValue() {
-        int maxValue = 0;
+    // Calculate an Array value of the hand
+    public int[] getTotalValueArray() {
         int[] values = new int[Card.Suit.values().length];
         for (Card.Suit suit : Card.Suit.values()) {
             values[suit.ordinal()] = 0;
@@ -44,31 +43,31 @@ public class Hand {
                     // add the value of the card to the value of the suit
                     switch (card.getRank()) {
                         case ACE:
-                            values[suit.ordinal()] += 11;
+                            values[suit.ordinal()] += card.getRank().getValue();
                             break;
                         case TWO:
-                            values[suit.ordinal()] += 2;
+                            values[suit.ordinal()] += card.getRank().getValue();
                             break;
                         case THREE:
-                            values[suit.ordinal()] += 3;
+                            values[suit.ordinal()] += card.getRank().getValue();
                             break;
                         case FOUR:
-                            values[suit.ordinal()] += 4;
+                            values[suit.ordinal()] += card.getRank().getValue();
                             break;
                         case FIVE:
-                            values[suit.ordinal()] += 5;
+                            values[suit.ordinal()] += card.getRank().getValue();
                             break;
                         case SIX:
-                            values[suit.ordinal()] += 6;
+                            values[suit.ordinal()] += card.getRank().getValue();
                             break;
                         case SEVEN:
-                            values[suit.ordinal()] += 7;
+                            values[suit.ordinal()] += card.getRank().getValue();
                             break;
                         case EIGHT:
-                            values[suit.ordinal()] += 8;
+                            values[suit.ordinal()] += card.getRank().getValue();
                             break;
                         case NINE:
-                            values[suit.ordinal()] += 9;
+                            values[suit.ordinal()] += card.getRank().getValue();
                             break;
                         case TEN:
                         case JACK:
@@ -81,14 +80,22 @@ public class Hand {
                 }
             }
         }
-        maxValue = values[0];
-        for (int value : values) {
-            if (value > maxValue) {
-                maxValue = value;
+        return values;
+    }
+
+    // Calculate the total value of the hand
+    public int getTotalValue(){
+        int values[] = getTotalValueArray();
+        int maxValue = 0;
+        for(int i = 0; i < values.length; i++){
+            if(values[i] > maxValue){
+                maxValue = values[i];
             }
         }
         return maxValue;
     }
+
+
 
     // Override toString method
     public String toString() {

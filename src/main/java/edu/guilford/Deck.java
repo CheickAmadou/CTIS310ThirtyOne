@@ -1,11 +1,13 @@
 package edu.guilford;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Random;
 
 public class Deck {
     private ArrayList<Card> deck = new ArrayList<Card>();
-    private Random rand = new Random();
+    private final Random rand = new Random();
 
     public Deck() {
         build();
@@ -28,13 +30,7 @@ public class Deck {
     }
 
     public void shuffle() {
-        ArrayList<Card> tempDeck = new ArrayList<Card>();
-        while (deck.size() > 0) {
-            int loc = rand.nextInt(deck.size());
-            tempDeck.add(deck.get(loc));
-            deck.remove(loc);
-        }
-        deck = tempDeck;
+       Collections.shuffle(deck, rand);
     }
 
     public Card pick(int i) {
